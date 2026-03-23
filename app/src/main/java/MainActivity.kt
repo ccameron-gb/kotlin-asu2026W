@@ -29,11 +29,11 @@ class MainActivity : AppCompatActivity() {
         if (isBlue) {
             // If isBlue is true, set the background to blue and button text to "Click to change to Red"
             window.decorView.setBackgroundColor(Color.BLUE)
-            button.text = "Click to change to Red"
+            button.text = "Press me to change color"
         } else {
             // If isBlue is false, set the background to red and button text to "Click to change to Blue"
             window.decorView.setBackgroundColor(Color.RED)
-            button.text = "Click to change to Blue"
+            button.text = "Press me to change color"
         }
     }
 }
