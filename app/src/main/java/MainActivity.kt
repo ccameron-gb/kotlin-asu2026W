@@ -1,3 +1,10 @@
+/**
+ * MainActivity.kt
+ *
+ * A simple color toggle app. Clicking the button switches
+ * the background color between red and blue.
+ */
+
 package com.example.kotlin_demo_mobile_app
 
 import android.graphics.Color
