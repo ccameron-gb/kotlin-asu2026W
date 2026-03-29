@@ -11,7 +11,6 @@
     <a href="https://developer.android.com/"><img src="https://img.shields.io/badge/Android-7.3.1-3DDC84?style=for-the-badge&logo=android" alt="Android Badge" /></a>
     <a href="https://developer.android.com/studio"><img src="https://img.shields.io/badge/Android_Studio-2022.3.1-3DDC84?style=for-the-badge&logo=androidstudio" alt="Android Studio Badge" /></a>
     <br>
-    <a href="https://github.com/scottgriv"><img src="https://img.shields.io/badge/github-follow_me-181717?style=for-the-badge&logo=github&color=181717" alt="GitHub Badge" /></a>
     <a href="mailto:scott.grivner@gmail.com"><img src="https://img.shields.io/badge/gmail-contact_me-EA4335?style=for-the-badge&logo=gmail" alt="Email Badge" /></a>
     <a href="https://www.buymeacoffee.com/scottgriv"><img src="https://img.shields.io/badge/buy_me_a_coffee-support_me-FFDD00?style=for-the-badge&logo=buymeacoffee&color=FFDD00" alt="BuyMeACoffee Badge" /></a>
     <br>
