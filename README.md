@@ -77,6 +77,12 @@ This project is released under the terms of **The Unlicense**, which allows you 
 **Website:** [linktr.ee/scottgriv](https://www.linktr.ee/scottgriv) <br>
 **Reference:** [Main Branch](https://github.com/scottgriv/kotlin-android_mobile_app_demo) <br>
 
+## Contributors
+- Peter Liang
+
+## What We Learned
+- Gradle sync needs to finish successfully before the app can run in the emulator.
+- Creating an Android emulator requires choosing a device profile and installing a system image first.
 ---------------
 
 <div align="center">
