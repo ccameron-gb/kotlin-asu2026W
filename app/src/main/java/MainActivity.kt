@@ -13,6 +13,7 @@ import android.widget.TextView
 class MainActivity : AppCompatActivity() {
 
     private var isBlue = false  // Track the background color
+    private val config = Config()
 
     //Task2/4
     private lateinit var myName: String
@@ -31,6 +32,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // DSL-style config initialization using invoke convention
+        config {
+            theme = "dark"
+            fontSize = 16
+            primaryColor = "Red"
+        }
+
         setContentView(R.layout.activity_main)
 
         val myButton: Button = findViewById(R.id.myButton)
