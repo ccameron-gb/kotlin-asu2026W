@@ -15,9 +15,18 @@ import android.widget.Button
 class MainActivity : AppCompatActivity() {
 
     private var isBlue = false  // Track the background color
+    private val config = Config()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // DSL-style config initialization using invoke convention
+        config {
+            theme = "dark"
+            fontSize = 16
+            primaryColor = "Red"
+        }
+
         setContentView(R.layout.activity_main)
 
         val myButton: Button = findViewById(R.id.myButton)
