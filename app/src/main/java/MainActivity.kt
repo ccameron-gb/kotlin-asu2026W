@@ -34,7 +34,9 @@ class MainActivity : AppCompatActivity() {
 
         updateBackgroundAndButtonText(myButton)
 
-        myButton.setOnClickListener {
+        myButton.setVisible(true)
+
+        myButton.onClicked {
             isBlue = !isBlue
             updateBackgroundAndButtonText(myButton)
         }
