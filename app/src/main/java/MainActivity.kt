@@ -2,12 +2,19 @@ package com.example.kotlin_demo_mobile_app
 
 import android.graphics.Color
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.util.Log
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private var isBlue = false  // Track the background color
+    private var isBlue = false
+
+    data class AppInfo(
+        val name: String,
+        val version: String,
+        val description: String
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,11 +22,19 @@ class MainActivity : AppCompatActivity() {
 
         val myButton: Button = findViewById(R.id.myButton)
 
-        // Initial setup
+        val appList = listOf(
+            AppInfo("ColorChanger", "1.0", "Changes background color on button click"),
+            AppInfo("ColorChanger", "1.2", "Metadata added from V1.0")
+        )
+
+        val filteredApps = appList.filter { it.version.startsWith("1") }
+        val appNames = filteredApps.map { it.name }
+
+        Log.d("AppInfoTest", appNames.toString())
+
         updateBackgroundAndButtonText(myButton)
 
         myButton.setOnClickListener {
-            // Toggle the isBlue flag
             isBlue = !isBlue
             updateBackgroundAndButtonText(myButton)
         }
@@ -27,11 +42,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateBackgroundAndButtonText(button: Button) {
         if (isBlue) {
-            // If isBlue is true, set the background to blue and button text to "Click to change to Red"
             window.decorView.setBackgroundColor(Color.BLUE)
             button.text = "Click to change to Red"
         } else {
-            // If isBlue is false, set the background to red and button text to "Click to change to Blue"
             window.decorView.setBackgroundColor(Color.RED)
             button.text = "Click to change to Blue"
         }
