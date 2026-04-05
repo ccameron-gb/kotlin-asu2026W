@@ -1,5 +1,10 @@
+/**
+ * MainActivity.kt
+ *
+ * A simple color toggle app. Clicking the button switches
+ * the background color between red and blue.
+ */
 package com.example.kotlin_demo_mobile_app
-
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,11 +12,14 @@ import android.widget.Button
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
+  
     private var isBlue = false  // Track the background color
+  
     // Task 2/4
     private lateinit var myName: String
     private lateinit var textView: TextView
-    // Shares between Task 1 and 2
+  
+    ////Task 2/4
     private val greetingMessage: String
         get() {
             val hour = java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY)
@@ -51,26 +59,27 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val myButton: Button = findViewById(R.id.myButton)
+
         // Task 1/4
         textView = findViewById(R.id.textView)
         myName = "Alejandro"
-        textView.text = greetingMessage  // Set greeting once
+        textView.text = greetingMessage
+
+        //Task 3/4 setup
+        val originalUser = User("Alejandro", "001", "Intern")
+        val newUser = originalUser.copy(role = "Knowledge Manager")
+        println("Original User: $originalUser")
+        println("New User: $newUser")
 
         // Initial setup
         updateBackgroundAndButtonText(myButton)
-
-        //Task 3/4 setup
-        val originalUser = User("Alejandro", "001", "Developer")
-        val newUser = originalUser.copy(role = "Team Lead")
-        println("Original User: $originalUser")
-        println("New User: $newUser")
 
         myButton.setOnClickListener {
             // Toggle the isBlue flag
             isBlue = !isBlue
             updateBackgroundAndButtonText(myButton)
 
-            //trigger after every button press
+            //updates time greeting dynamically, Task 2/4
             textView.text = greetingMessage
         }
     }
