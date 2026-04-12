@@ -1,7 +1,8 @@
 package com.example.kotlin_demo_mobile_app
 
 class RepositoryManager {
-    private val repositories = mutableMapOf<Class<*>, Any>()
+    @PublishedApi
+    internal val repositories = mutableMapOf<Class<*>, Any>()
 
     inline fun <reified T : Identifiable> repository(): Repository<T> {
         val key = T::class.java
