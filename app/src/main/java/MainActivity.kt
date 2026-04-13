@@ -7,18 +7,33 @@
 package com.example.kotlin_demo_mobile_app
 import android.graphics.Color
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.util.Log
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
-  
-    private var isBlue = false  // Track the background color
-  
+
+    private var isBlue = false
+    private val repositoryManager = RepositoryManager()
+
+    data class AppInfo(
+        override val id: String,
+        val name: String,
+        val version: String,
+        val description: String
+    ) : Identifiable
+
+    data class basic_User(
+        override val id: String,
+        val username: String
+    ) : Identifiable
+
+
     // Task 2/4
     private lateinit var myName: String
     private lateinit var textView: TextView
-  
+
     ////Task 2/4
     private val greetingMessage: String
         get() {
@@ -60,6 +75,43 @@ class MainActivity : AppCompatActivity() {
 
         val myButton: Button = findViewById(R.id.myButton)
 
+        val appList = listOf(
+            AppInfo(
+                id = "app1",
+                name = "ColorChanger",
+                version = "1.0",
+                description = "Changes background color on button click"
+            ),
+            AppInfo(
+                id = "app2",
+                name = "ColorChanger",
+                version = "1.2",
+                description = "Metadata added from V1.0"
+            )
+        )
+
+        appList.forEach { repositoryManager.save(it) }
+
+        val user = basic_User(
+            id = "user1",
+            username = "student_user"
+        )
+        repositoryManager.save(user)
+
+        val filteredApps = repositoryManager
+            .repository<AppInfo>()
+            .getAll()
+            .filter { it.version.startsWith("1") }
+
+        val appNames = filteredApps.map { it.name }
+        Log.d("AppInfoTest", appNames.toString())
+
+        val retrievedApp = repositoryManager.get<AppInfo>("app1")
+        val retrievedUser = repositoryManager.get<basic_User>("user1")
+
+        Log.d("RepositoryTest", "Retrieved app: ${retrievedApp?.name}")
+        Log.d("RepositoryTest", "Retrieved user: ${retrievedUser?.username}")
+
         // Task 1/4
         textView = findViewById(R.id.textView)
         myName = "Alejandro"
@@ -75,7 +127,6 @@ class MainActivity : AppCompatActivity() {
         updateBackgroundAndButtonText(myButton)
 
         myButton.setOnClickListener {
-            // Toggle the isBlue flag
             isBlue = !isBlue
             updateBackgroundAndButtonText(myButton)
 
