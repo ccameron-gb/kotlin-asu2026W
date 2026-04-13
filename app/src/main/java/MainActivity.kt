@@ -7,6 +7,7 @@
 
 package com.example.kotlin_demo_mobile_app
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -14,14 +15,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import androidx.annotation.RequiresApi
 
-
 class MainActivity : AppCompatActivity() {
 
     private var isBlue = false  // Track the background color
-    //example and can be changed
-    private val colorA = Color.parseColor("#3B8BD4")
-    private val colorB = Color.parseColor("#E8593C")
 
+    @SuppressLint("NewApi")
+    private val blue  = ColorBuilder().rgb(0, 0, 212).toColor()
+    @SuppressLint("NewApi")
+    private val red = ColorBuilder().rgb(232, 0, 0).toColor()
+    @SuppressLint("NewApi")
+    private val green = ColorBuilder().rgb(0, 220, 0).toColor()
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -34,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         myButton.setOnClickListener {
             // Toggle the isBlue flag
             isBlue = !isBlue
-            val mixed = colorA + colorB
+            val mixed = (blue + red).toArgb()
             window.decorView.setBackgroundColor(mixed)
             //updateBackgroundAndButtonText(myButton)  // original
         }
@@ -53,7 +58,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    operator fun Color.plus(other: Color): Color{
+    operator fun Color.plus(other: Color): Color {
         val r = ((red()   + other.red())   / 2f).coerceIn(0f, 1f)
         val g = ((green() + other.green()) / 2f).coerceIn(0f, 1f)
         val b = ((blue()  + other.blue())  / 2f).coerceIn(0f, 1f)
