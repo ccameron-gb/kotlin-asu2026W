@@ -14,13 +14,13 @@ import android.widget.Button
 
 class MainActivity : AppCompatActivity() {
 
-    private var isBlue = false  // Track the background color
+    private var isBlue = false
     private val config = Config()
+    private val buttonAdapter = ComponentAdapter<Button>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // DSL-style config initialization using invoke convention
         config {
             theme = "dark"
             fontSize = 16
@@ -31,11 +31,16 @@ class MainActivity : AppCompatActivity() {
 
         val myButton: Button = findViewById(R.id.myButton)
 
+        // Integrate ComponentAdapter with ColorUtils
+        buttonAdapter.add(myButton) {
+            val color = getColorHexOrDefault("Blue")
+            setBackgroundColor(color)
+        }
+
         // Initial setup
         updateBackgroundAndButtonText(myButton)
 
         myButton.setOnClickListener {
-            // Toggle the isBlue flag
             isBlue = !isBlue
             updateBackgroundAndButtonText(myButton)
         }
@@ -43,11 +48,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateBackgroundAndButtonText(button: Button) {
         if (isBlue) {
-            // If isBlue is true, set the background to blue and button text to "Click to change to Red"
             window.decorView.setBackgroundColor(Color.BLUE)
             button.text = "Click to change to Red"
         } else {
-            // If isBlue is false, set the background to red and button text to "Click to change to Blue"
             window.decorView.setBackgroundColor(Color.RED)
             button.text = "Click to change to Blue"
         }
