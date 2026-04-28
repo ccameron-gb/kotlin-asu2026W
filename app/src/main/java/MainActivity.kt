@@ -1,9 +1,3 @@
-/**
- * MainActivity.kt
- *
- * A simple color toggle app. Clicking the button switches
- * the background color between red and blue.
- */
 package com.example.kotlin_demo_mobile_app
 import android.graphics.Color
 import android.os.Build
@@ -13,10 +7,17 @@ import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
+import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
 
-    private var isBlue = false
+    private var isBlue = false  // Track the background color
+    private var counter: Int by Delegates.observable(0) { _, oldValue, newValue ->
+        // This block runs AFTER the value changes
+        textView?.text = "Counter: $newValue"
+    }
+    private var textView: TextView? = null
+
     private val repositoryManager = RepositoryManager()
 
     //example and can be changed
@@ -80,6 +81,9 @@ class MainActivity : AppCompatActivity() {
 
         val myButton: Button = findViewById(R.id.myButton)
 
+        textView = findViewById(R.id.textView)
+        textView?.text = "Counter: $counter"
+
         val appList = listOf(
             AppInfo(
                 id = "app1",
@@ -133,12 +137,19 @@ class MainActivity : AppCompatActivity() {
 
         myButton.setOnClickListener {
             isBlue = !isBlue
+            updateBackgroundAndButtonText(myButton)
+            incrementCounter()
             val mixed = colorA + colorB
             window.decorView.setBackgroundColor(mixed)
 
             // updates time greeting dynamically, Task 2/4
             textView.text = greetingMessage
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        textView = null // Avoid memory leaks
     }
 
     private fun updateBackgroundAndButtonText(button: Button) {
@@ -158,5 +169,9 @@ class MainActivity : AppCompatActivity() {
         val b = ((blue()  + other.blue())  / 2f).coerceIn(0f, 1f)
         val a = ((alpha() + other.alpha()) / 2f).coerceIn(0f, 1f)
         return Color.valueOf(r, g, b, a)
+    }
+
+    private fun incrementCounter() {
+        counter++ // This will trigger the observable delegate
     }
 }
