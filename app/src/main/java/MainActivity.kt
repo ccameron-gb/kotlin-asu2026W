@@ -1,4 +1,6 @@
 package com.example.kotlin_demo_mobile_app
+
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -75,6 +77,14 @@ class MainActivity : AppCompatActivity() {
     }
     //End of Task3/4
 
+    @SuppressLint("NewApi")
+    private val blue  = ColorBuilder().rgb(0, 0, 212).toColor()
+    @SuppressLint("NewApi")
+    private val red = ColorBuilder().rgb(232, 0, 0).toColor()
+    @SuppressLint("NewApi")
+    private val green = ColorBuilder().rgb(0, 220, 0).toColor()
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -137,6 +147,9 @@ class MainActivity : AppCompatActivity() {
 
         myButton.setOnClickListener {
             isBlue = !isBlue
+            val mixed = (blue + red).toArgb()
+            window.decorView.setBackgroundColor(mixed)
+            //updateBackgroundAndButtonText(myButton)  // original
             updateBackgroundAndButtonText(myButton)
             incrementCounter()
             val mixed = colorA + colorB
